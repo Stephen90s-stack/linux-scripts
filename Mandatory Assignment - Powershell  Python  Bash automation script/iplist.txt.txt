@@ -1,0 +1,4 @@
+10.20.12.08 admin p@ssW0rd
+10.20.12.12 admin p@ssW0rd
+10.20.12.21 admin p@ssW0rd
+10.20.12.22 admin p@ssW0rd

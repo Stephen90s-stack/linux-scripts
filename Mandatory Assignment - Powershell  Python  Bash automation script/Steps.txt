@@ -1,0 +1,45 @@
+Create a script to automate fileops on 4 remote servers. The task will entail
+1. Connecting to servers (IP 10.20.12.08, 10.20.12.12, 10.20.12.21, 10.20.12.22) using
+Username: admin Password: p@ssW0rd
+2. Search for a file called reaper which can be running or dormant
+3. Log the current location and PID of the file.
+4. Delete this file
+5. Replace with another file reaper with content “Deleted”
+6. Log the current operations execution time.
+
+Steps:
+
+1. SetUp Ansible on the master system
+
+	Assuming 10.20.12.08, 10.20.12.12, 10.20.12.21, 10.20.12.22 as slave
+	
+	Install ansible using following commands on master:
+	
+		apt-get update
+
+		apt-get install software-properties-common
+
+		apt-add-repository ppa:ansible/ansible
+
+		apt-get update
+
+		apt-get install ansible
+		
+	Edit Hosts file using:
+	
+	- vi /etc/ansible/hosts
+	
+	- create a group and add all private ip address of all slaves
+	
+	- vi /etc/ssh/sshd_config (Do these changes on both master and slave)
+		Change:
+			PermitRootLogin No => PermitRootLogin Yes
+			PasswordAuthenthication No => PasswordAuthenthication Yes
+	- service sshd restart (Execute on both master and slave)
+		
+2. Execute Scripts on master
+	- Create a file iplist.txt and add all ip, user and password
+	- Generating id_rsa.pub: ssh-keygen -t rsa
+	- Copy iplist.txt test1.sh test2.sh, test3.sh in a directory
+	- bash test1.sh (Copies id_rsa.pub on all slaves using ssh-copy-id to avoid entering password and execute a smooth ssh connection)
+	- time bash test2.sh reaper (Find the reaper file => Logs it location => Deletes it => And Replaces it with new file => Prints total execution time)

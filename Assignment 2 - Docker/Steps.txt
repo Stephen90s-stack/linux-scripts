@@ -1,0 +1,23 @@
+Create a bash script to create a docker container which will host a static website. Container
+needs to be portable and needs to run on port 80. Publish the newly created container to the
+private repository hosted on “registry.webuy.com”. Assume anonymous authentication to the
+docker registry. Also save the newly created docker image as tar ball file
+
+Execute bash test4.sh
+
+#! /bin/bash
+
+docker pull nginx  (Pulls docker image with static website hosted)
+
+docker run -it --rm -d -p 80:80 --name web nginx (Create container from image and is mapped to port 80 to access the application)
+
+docker commit web newimage (Creates image from container)
+
+docker save newimage | gzip > myimage_latest.tar.gz (Create tar file of image)
+
+docker tag newimage registry.webuy.com/mywebserver:test (Tage the image to push to remove repository)
+
+docker push registry.webuy.com/mywebserver:test (push docker image to remote docker repository)
+
+----------------------------------------
+bash test4.sh

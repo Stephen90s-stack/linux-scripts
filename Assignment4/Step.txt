@@ -1,0 +1,8 @@
+Grep URL inside a file to replace
+List of directories given to exclude in a file which will be provided by user on execution of script
+Update files inside a Zip file without extraction
+Inputs needed for script:
+Enter a file name which includes directories to be excluded
+Old URL pattern to be replaced
+New URL pattern to replace
+Whether to replace in ZIP Files or not

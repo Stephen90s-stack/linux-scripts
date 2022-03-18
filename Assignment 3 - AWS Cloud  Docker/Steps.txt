@@ -1,0 +1,20 @@
+Create a script would run docker container image registry.webuy.com/mywebserver on port
+5000. Assuming this docker container is running on two AWS EC2 instances, create a cloud
+formation template, which will create a AWS ELB which will load balance traffic to both the
+instance
+
+
+1. Execute bash test5.sh on both Ec2 instances to deploy the application on port 5000
+  #! /bin/bash
+
+  docker pull registry.webuy.com/mywebserver:latest
+
+  docker run -d -p 5000:80 --name testcont registry.webuy.com/mywebserver:latest
+
+2. Execute ALBLoadBalancer.yaml on AWS cloudformation console
+    - Enter Environement name
+    - Enter the VPC in which the load needs to be deployed
+    - Enter the security group
+    - Enter the instance ID (i-xyx) of first and second instance on which the application is deployed
+    - Listener, TargetGroup and an internet facing loadBalancer will be created using the .yaml file
+    - Copy the load balancer DNS and append 5000 as port as the application needs to be access on port 5000 and put it on browser
